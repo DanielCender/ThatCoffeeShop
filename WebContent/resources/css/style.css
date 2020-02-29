@@ -1,0 +1,29 @@
+* {
+	font-family: helvetica;	
+	text-align: center;
+}
+
+body {
+	background-color: #DDD;
+}
+
+.order-table {
+	border:1px solid black;
+	margin: auto;
+	width:80%;
+	border-radius:5px;
+	background: #a5b1c2;
+	passing:10px;
+	text-align: center;
+}
+
+.order-table-header {
+	font-weight: bold;
+}
+
+.order-table-odd {
+	background: #d1d8e0;
+}
+
+.order-table-even {
+}
