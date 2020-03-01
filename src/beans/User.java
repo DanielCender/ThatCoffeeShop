@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@ManagedBean @ViewScoped 
+@ManagedBean @SessionScoped 
 public class User {
 	@NotNull() @Size(min=5, max=15)
 	private String firstName, lastName, email, address, phone, username, password;
