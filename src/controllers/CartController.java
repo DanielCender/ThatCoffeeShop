@@ -7,19 +7,18 @@ import javax.faces.context.FacesContext;
 import beans.User;
 
 @ManagedBean @ViewScoped 
-public class RegisterController {
-	public String onSubmit() {
-		//get the user value from the input form.
+public class CartController {
+	
+	public void onEmpty() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
 		
-		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
-		//Adds credentials to Hash Map in AuthenticationController
-		AuthenticationController.addUser(user.getUsername(), user.getPassword());
+		System.out.println("Cart BEFORE Clear - " + user.getCart().toString());
 		
-		//show next page
-		return "index.xhtml";
+		user.getCart().clear();
+		
+		System.out.println("Cart AFTER Clear - " + user.getCart().toString());
 	}
 }
