@@ -16,7 +16,7 @@ public class LoginController {
 		
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-		
+
 		//Checks username and password.
 		System.out.println("Testing Credentials... username = " + user.getUsername() + " password = " + user.getPassword());
 		boolean auth = AuthenticationController.authenticate(user.getUsername(), user.getPassword());
