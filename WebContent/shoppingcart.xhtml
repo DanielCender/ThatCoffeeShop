@@ -21,9 +21,10 @@
 						#{c.price}
 					</h:column>
 		</h:dataTable>
-			<h:commandButton action="orderController.onBuy()" value="Checkout" />
-			
-			<h:commandButton action="orderController.onBuy()" value="Empty Cart" />
+			<h:form>
+				<h:commandButton action="#{cartController.onEmpty()}" value="Checkout" />
+				<h:commandButton action="#{cartController.onEmpty()}" value="Empty Cart" />
+			</h:form>
 		</ui:define>
 	</ui:composition>
 	
