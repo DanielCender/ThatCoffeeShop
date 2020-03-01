@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @ManagedBean @ViewScoped 
 public class User {
 	@NotNull() @Size(min=5, max=15)
-	private String firstName, lastName, email, address, phone, password;
+	private String firstName, lastName, email, address, phone, username, password;
 	List<Order> orders = new ArrayList<Order>();
 	List<Product> cart = new ArrayList<Product>();
 
@@ -24,12 +24,13 @@ public class User {
 	}
 
 	public User() {
-		this.firstName = "tester";
-		this.lastName = "testington";
-		this.email = "test@gmail.com";
-		this.address = "123 test st.";
-		this.phone = "555-555-5543";
-		this.password = "TestingTon23";
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.address = "";
+		this.phone = "";
+		this.username = "";
+		this.password = "";
 		orders.add(new Order("000","This is product 1",(float)1.00,1));
 		orders.add(new Order("000","This is product 2",(float)1.00,1));
 		orders.add(new Order("000","This is product 3",(float)1.00,1));
@@ -91,6 +92,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

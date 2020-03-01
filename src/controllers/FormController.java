@@ -25,7 +25,6 @@ public class FormController {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		return "responsePage.xhtml";
 	}
-	
 	public String onFlash(User user) {
 		Flash fl = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		String firstName = user.getFirstName();
