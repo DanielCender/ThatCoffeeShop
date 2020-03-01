@@ -18,8 +18,6 @@ public class LoginController {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
 		//Checks username and password.
-		
-		//AuthenticationController ac = new AuthenticationController();
 		System.out.println("Testing Credentials... username = " + user.getUsername() + " password = " + user.getPassword());
 		boolean auth = AuthenticationController.authenticate(user.getUsername(), user.getPassword());
 		System.out.println("boolean auth reads = " + auth);
