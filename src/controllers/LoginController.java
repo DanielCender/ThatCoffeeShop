@@ -17,7 +17,6 @@ public class LoginController {
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 		//Checks username and password.
 		System.out.println("Testing Credentials... username = " + user.getUsername() + " password = " + user.getPassword());
@@ -28,8 +27,6 @@ public class LoginController {
 		} else {
 			System.out.println("User Credentials WRONG");
 		}
-=======
->>>>>>> parent of ac5a38f... Order buttons and Cart Buttons
 =======
 >>>>>>> parent of ac5a38f... Order buttons and Cart Buttons
 		
