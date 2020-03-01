@@ -23,9 +23,7 @@
 						#{p.price}
 					</h:column>
 					<h:column>
-						<h:form>
-							<h:commandButton action="#{orderController.onAddToCart(p)}" value="Add to cart" />
-						</h:form>
+						<h:commandButton action="orderController.onBuy()" value="Buy" />
 					</h:column>
 					
 				</h:dataTable>
