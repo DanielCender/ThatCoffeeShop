@@ -10,15 +10,13 @@
 	<h:body>
 	<ui:composition template="/Layouts/commonLayout.xhtml">
 		<ui:define name="content">
+			Please log into your account to place an order...
 			<h:form>
-				Please log into your account to place an order...
-				<BR></BR>
 				First Name: <h:inputText value="#{user.firstName}" />
 				<BR></BR>
 				Last Name: <h:inputText value="#{user.lastName}" />
 				<BR></BR><BR></BR>
-				<h:commandButton action="#{formController.onSubmit()}" value="Submit" />     
-				<h:commandButton action="#{formController.onFlash(user)}" value="Flash" />
+				<h:commandButton action="#{formController.onSubmit()}" value="Submit" />
 			</h:form>
 			<h:messages />
 		</ui:define>
