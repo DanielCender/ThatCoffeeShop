@@ -21,4 +21,17 @@ public class CartController {
 		
 		System.out.println("Cart AFTER Clear - " + user.getCart().toString());
 	}
+	
+	public void onCheckout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
+		
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
+		
+		System.out.println("Cart BEFORE Clear - " + user.getCart().toString());
+		
+		user.checkout(user.getCart());
+		
+		System.out.println("Cart AFTER Clear - " + user.getCart().toString());
+	}
 }
