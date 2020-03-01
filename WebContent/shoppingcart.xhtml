@@ -18,7 +18,9 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Product Price</f:facet>
-						#{c.price}
+						<h:outputText value="#{c.price}" >
+							<f:convertNumber type="currency" />
+						</h:outputText>
 					</h:column>
 		</h:dataTable>
 			<h:form>
