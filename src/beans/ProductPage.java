@@ -11,6 +11,7 @@ public class ProductPage {
 	List<Product> products = new ArrayList<Product>();
 
 	public ProductPage() {
+		//load product information to be listed on the product pages
 		products.add(new Product("Coffee", (float)5.00));
 		products.add(new Product("Tea", (float)2.00));
 		products.add(new Product("Espresso", (float)3.00));

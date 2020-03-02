@@ -9,10 +9,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ManagedBean @SessionScoped 
-public class User {
+public class User { //Will later be split into Customer and Admin classes that use User as a composition
 	@NotNull() @Size(min=5, max=15)
-	private String firstName, lastName, email, address, phone, username, password;
-	List<Order> orders = new ArrayList<Order>();
+	private String firstName, lastName, email, address, phone, username, password, DOB, creditCardInfo;
+	float accountBalance = 0;
+	List<OrderDetails> orders = new ArrayList<OrderDetails>();
 	List<Product> cart = new ArrayList<Product>();
 
 	public List<Product> getCart() {
@@ -31,18 +32,14 @@ public class User {
 		this.phone = "";
 		this.username = "";
 		this.password = "";
-		orders.add(new Order("000","This is product 1",(float)1.00,1));
-		orders.add(new Order("000","This is product 2",(float)1.00,1));
-		orders.add(new Order("000","This is product 3",(float)1.00,1));
-		orders.add(new Order("000","This is product 4",(float)1.00,1));
 		cart.add(new Product("Test",(float)5.00));
 	}
 	
-	public List<Order> getOrders() {
+	public List<OrderDetails> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderDetails> orders) {
 		this.orders = orders;
 	}
 	
@@ -102,6 +99,9 @@ public class User {
 		this.username = username;
 	}
 	
-	
+	public void checkout(List<Product> cart) {
+		//take the items from the cart and generate an OrderDetail and then add that OrderDetail to the User's orders list.
+		System.out.println("You've checked out!");
+	}
 	
 }
