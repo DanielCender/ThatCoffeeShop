@@ -101,6 +101,7 @@ public class User { //Will later be split into Customer and Admin classes that u
 	
 	public void checkout(List<Product> cart) {
 		//take the items from the cart and generate an OrderDetail and then add that OrderDetail to the User's orders list.
+		System.out.println("You've checked out!");
 	}
 	
 }
