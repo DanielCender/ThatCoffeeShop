@@ -1,4 +1,4 @@
-package controllers;
+package business;
 
 import java.util.HashMap;
 
@@ -7,19 +7,19 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class AuthenticationController {
+public class AuthenticationService {
 
 	static HashMap<String, String> credentials = new HashMap<>();
 	
-	public AuthenticationController() {
+	public AuthenticationService() {
 		credentials.put("testuser", "testpass");
 		credentials.put("testuser1", "testpass1");
 	}
 	
-	static boolean authenticate(String username, String password) {
+	public static boolean authenticate(String username, String password) {
 		String pw = "";
 		
-		System.out.println("Testing inside AuthenticationController | U: " + username + " | P: " + password);
+		System.out.println("Testing inside AuthenticationService | U: " + username + " | P: " + password);
 		if (credentials.containsKey(username)) {
 			pw = credentials.get(username);
 			if (password.equals(pw)) {
@@ -32,7 +32,7 @@ public class AuthenticationController {
 		}
 	}
 	
-	static void addUser(String username, String password) {
+	public static void addUser(String username, String password) {
 		credentials.put(username, password);
 	}
 	

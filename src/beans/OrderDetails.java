@@ -3,6 +3,11 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+@ManagedBean
+@ViewScoped
 public class OrderDetails {
 	String orderNo = "", dateCreated = "", dateCompleted = "", customerName = "", customerID = "", orderStatus = "";
 	Location location;

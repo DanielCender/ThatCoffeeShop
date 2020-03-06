@@ -5,6 +5,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import beans.User;
+import business.AuthenticationService;
 
 @ManagedBean @ViewScoped 
 public class RegisterController {
@@ -17,7 +18,8 @@ public class RegisterController {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
 		//Adds credentials to Hash Map in AuthenticationController
-		AuthenticationController.addUser(user.getUsername(), user.getPassword());
+		AuthenticationService.addUser(user.getUsername(), user.getPassword());
+		User.addUser(user);
 		
 		//show next page
 		return "index.xhtml";

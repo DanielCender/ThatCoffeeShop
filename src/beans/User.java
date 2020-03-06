@@ -8,21 +8,16 @@ import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import business.AuthenticationService;
+
 @ManagedBean @SessionScoped 
 public class User { //Will later be split into Customer and Admin classes that use User as a composition
-	@NotNull() @Size(min=5, max=15)
-	private String firstName, lastName, email, address, phone, username, password, DOB, creditCardInfo;
+	@NotNull() @Size(min=2, max=15)
+	private String firstName, lastName, email, address, phone, username, password, repeatPassword, DOB, creditCardInfo;
 	float accountBalance = 0;
 	List<OrderDetails> orders = new ArrayList<OrderDetails>();
 	List<Product> cart = new ArrayList<Product>();
-
-	public List<Product> getCart() {
-		return cart;
-	}
-
-	public void setCart(List<Product> cart) {
-		this.cart = cart;
-	}
+	static List<User> users = new ArrayList<User>();
 
 	public User() {
 		this.firstName = "";
@@ -35,6 +30,19 @@ public class User { //Will later be split into Customer and Admin classes that u
 		cart.add(new Product("Test",(float)5.00));
 	}
 	
+	public static void addUser(User user) {
+		users.add(user);
+		AuthenticationService.addUser(user.username, user.password);
+	}
+	
+	public List<Product> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Product> cart) {
+		this.cart = cart;
+	}
+
 	public List<OrderDetails> getOrders() {
 		return orders;
 	}
@@ -99,9 +107,24 @@ public class User { //Will later be split into Customer and Admin classes that u
 		this.username = username;
 	}
 	
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
 	public void checkout(List<Product> cart) {
 		//take the items from the cart and generate an OrderDetail and then add that OrderDetail to the User's orders list.
 		System.out.println("You've checked out!");
 	}
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address
+				+ ", phone=" + phone + ", username=" + username + ", password=" + password + ", DOB=" + DOB + "]";
+	}
+	
 	
 }

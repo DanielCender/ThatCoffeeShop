@@ -13,34 +13,73 @@
 			<h:form >
 				<table align="center">
 					<tr>
-						<td>First Name:</td><td><h:inputText value="#{user.firstName}" /></td>
+						<td>First Name:</td>
+						<td>
+							<h:inputText label="First Name"
+							id="fn" value="#{user.firstName}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Last Name:</td><td><h:inputText value="#{user.lastName}" /></td>
+						<td>Last Name:</td>
+						<td>
+							<h:inputText label="Last Name"
+							id="ln" value="#{user.lastName}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Email:</td><td> <h:inputText value="#{user.email}" /></td>
+						<td>Email:</td>
+						<td> 
+							<h:inputText label="Email"
+							id="email" value="#{user.email}" 
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Address:</td><td> <h:inputText value="#{user.address}" /></td>
+						<td>Address:</td>
+						<td> 
+							<h:inputText label="Address"
+							id="address" value="#{user.address}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Phone:</td><td> <h:inputText value="#{user.phone}" /></td>
+						<td>Phone:</td>
+						<td> 
+							<h:inputText label="Phone Number"
+							id="phone" value="#{user.phone}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Username:</td><td> <h:inputText value="#{user.username}" /></td>
+						<td>Username:</td>
+						<td> 
+							<h:inputText label="Username"
+							id="uname" value="#{user.username}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Password:</td><td> <h:inputText value="#{user.password}" /></td>
+						<td>Password:</td>
+						<td> 
+							<h:inputText label="Password"
+							id="pass" value="#{user.password}"
+							required="true" />
+						</td>
 					</tr>
 					<tr>
-						<td>Repeat Password:</td><td> <h:inputText value="#{user.password}" /></td>
+						<td>Repeat Password:</td>
+						<td> 
+							<h:inputText label="Repeat Password"
+							id="repass" value="#{user.repeatPassword}"
+							required="true" />
+						</td>
 					</tr>
 				</table>
 				<BR></BR><BR></BR>
-				<h:commandButton action="#{registerController.onSubmit()}" value="Submit" />
+				<h:commandButton action="confirmRegister" value="Submit" />
 			</h:form>
-			<h:messages />
 		</ui:define>
 	</ui:composition>
 	

@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	  
+	<h:head>
+		<title><ui:insert name="pageTitle">Please Verify Information</ui:insert></title>
+	</h:head>
+
+	<h:body>
+	<ui:composition template="/Layouts/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form >
+				<table align="center">
+					<tr>
+						<td>First Name:</td>
+						<td>
+							<h:outputText value="#{user.firstName}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Last Name:</td>
+						<td>
+							<h:outputText value="#{user.lastName}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td>
+							<h:outputText value="#{user.email}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Address:</td>
+						<td>
+							<h:outputText value="#{user.address}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Phone:</td>
+						<td>
+							<h:outputText value="#{user.phone}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Username:</td>
+						<td>
+							<h:outputText value="#{user.username}" />
+						</td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td>
+							<h:outputText value="#{user.password}" />
+						</td>
+					</tr>
+				</table>
+				<BR></BR><BR></BR>
+				<h:commandButton action="#{registerController.onSubmit()}" value="Submit" />
+			</h:form>
+			<h:messages />
+		</ui:define>
+	</ui:composition>
+	
+	</h:body>
+
+</html>
