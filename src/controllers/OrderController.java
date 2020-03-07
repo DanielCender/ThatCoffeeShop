@@ -38,7 +38,7 @@ public class OrderController {
 		
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
 
-		services.getProducts().add(product);
+		services.addProduct(product.getName(), product.getPrice());
 		
 		
 	}
