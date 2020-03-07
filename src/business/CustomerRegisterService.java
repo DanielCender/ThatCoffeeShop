@@ -8,7 +8,6 @@ import javax.enterprise.inject.Alternative;
 @Local(RegisterInterface.class)
 @Alternative
 public class CustomerRegisterService implements RegisterInterface {
-
 	@Override
 	public void test() {
 		// TODO Auto-generated method stub

@@ -3,12 +3,18 @@ package controllers;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import beans.Product;
 import beans.User;
+import business.OrderServiceInterface;
 
 @ManagedBean @ViewScoped 
 public class OrderController {
+	
+	@Inject
+	OrderServiceInterface services;
+	
 	public void onAddToCart(Product p) {
 		//get the user value from the input form.
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -24,5 +30,9 @@ public class OrderController {
 	
 	public void onBuy() {
 		
+	}
+	
+	public OrderServiceInterface getService() {
+		return services;
 	}
 }
