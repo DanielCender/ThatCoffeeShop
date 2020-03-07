@@ -28,11 +28,18 @@ public class OrderController {
 		user.getCart().add(p);
 	}
 	
-	public void onBuy() {
-		
-	}
-	
 	public OrderServiceInterface getService() {
 		return services;
+	}
+	
+	public void onAddProduct() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Product product = context.getApplication().evaluateExpressionGet(context, "#{product}", Product.class);
+		
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
+
+		services.getProducts().add(product);
+		
+		
 	}
 }

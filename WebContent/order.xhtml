@@ -31,6 +31,14 @@
 					</h:column>
 					
 				</h:dataTable>
+				
+				<h:form>
+				Add a product...
+				<BR></BR>
+				Name: <h:inputText value="#{product.name}" />
+				Price: <h:inputText value="#{product.price}" />
+				<h:commandButton action="#{orderController.onAddProduct()}" value="Submit" />
+			</h:form>
 		
 		</ui:define>
 	</ui:composition>

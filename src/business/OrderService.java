@@ -10,8 +10,6 @@ import beans.Product;
 
 @Stateless @Local(OrderServiceInterface.class)
 public class OrderService implements OrderServiceInterface {
-
-
 	List<Product> products = new ArrayList<Product>();
 	
 	public OrderService() {
