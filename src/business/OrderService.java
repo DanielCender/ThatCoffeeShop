@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Alternative;
 
 import beans.Product;
 
-@Stateless @Local(OrderServiceInterface.class)
+@Stateless @Local(OrderServiceInterface.class) @Alternative
 public class OrderService implements OrderServiceInterface {
 	List<Product> products = new ArrayList<Product>();
 	

@@ -20,12 +20,12 @@ public class OrderController {
 		FacesContext context = FacesContext.getCurrentInstance();
 		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
 		
-		System.out.println(user.getCart().toString());
-		
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
 		user.getCart().add(p);
+
+		System.out.println(user.getCart().toString());
 	}
 	
 	public OrderServiceInterface getService() {

@@ -17,7 +17,7 @@ public class User { //Will later be split into Customer and Admin classes that u
 	float accountBalance = 0;
 	List<OrderDetails> orders = new ArrayList<OrderDetails>();
 	List<Product> cart = new ArrayList<Product>();
-	static List<User> users = new ArrayList<User>();
+	public static List<User> users = new ArrayList<User>();
 
 	public User() {
 		this.firstName = "";
@@ -25,11 +25,12 @@ public class User { //Will later be split into Customer and Admin classes that u
 		this.email = "";
 		this.address = "";
 		this.phone = "";
-		this.username = "";
-		this.password = "";
+		this.username = "def";
+		this.password = "pass";
 		cart.add(new Product("Test",(float)5.00));
 	}
 	
+	//Unused method
 	public static void addUser(User user) {
 		users.add(user);
 		AuthenticationService.addUser(user.username, user.password);
@@ -125,6 +126,4 @@ public class User { //Will later be split into Customer and Admin classes that u
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address
 				+ ", phone=" + phone + ", username=" + username + ", password=" + password + ", DOB=" + DOB + "]";
 	}
-	
-	
 }

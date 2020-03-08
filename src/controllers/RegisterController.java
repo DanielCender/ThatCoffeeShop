@@ -3,13 +3,19 @@ package controllers;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import beans.User;
-import business.AuthenticationService;
+import business.RegisterInterface;
 
 @ManagedBean @ViewScoped 
 public class RegisterController {
+	
+	@Inject
+	RegisterInterface services;
+	
 	public String onSubmit() {
+		
 		//get the user value from the input form.
 		FacesContext context = FacesContext.getCurrentInstance();
 		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
@@ -17,9 +23,12 @@ public class RegisterController {
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
-		//Adds credentials to Hash Map in AuthenticationController
+	/*	//Adds credentials to Hash Map in AuthenticationController
 		AuthenticationService.addUser(user.getUsername(), user.getPassword());
 		User.addUser(user);
+	*/	
+		
+		services.addUser(user);
 		
 		//show next page
 		return "index.xhtml";
