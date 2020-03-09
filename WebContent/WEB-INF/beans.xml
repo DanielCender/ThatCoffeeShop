@@ -6,5 +6,6 @@
   <class>business.CustomerLoginService</class>
   <class>business.OrderService</class>
   <class>business.CustomerRegisterService</class>
+  <class>database.Database</class>
  </alternatives>
 </beans>

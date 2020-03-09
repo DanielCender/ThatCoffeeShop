@@ -1,5 +1,7 @@
 package controllers;
 
+
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -15,7 +17,6 @@ public class RegisterController {
 	RegisterInterface services;
 	
 	public String onSubmit() {
-		
 		//get the user value from the input form.
 		FacesContext context = FacesContext.getCurrentInstance();
 		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
@@ -27,7 +28,6 @@ public class RegisterController {
 		AuthenticationService.addUser(user.getUsername(), user.getPassword());
 		User.addUser(user);
 	*/	
-		
 		services.addUser(user);
 		
 		//show next page
