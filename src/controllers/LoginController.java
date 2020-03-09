@@ -4,9 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-
 import beans.User;
-import business.AuthenticationService;
 import business.LoginInterface;
 import database.DatabaseInterface;
 
@@ -33,6 +31,7 @@ public class LoginController {
 		System.out.println("boolean auth reads = " + auth);
 		if (auth == true) {
 			System.out.println("User authenticated");
+			//load user into session
 		} else {
 			System.out.println("User Credentials WRONG");
 		}
@@ -41,7 +40,7 @@ public class LoginController {
 		return "index.xhtml";
 	}
 	
-	public String login() {
+/*	public String login() {
 		System.out.println("Login called from LoginController");
 		//get the user value from the input form.
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -60,5 +59,5 @@ public class LoginController {
 		} else {
 			return "register.xhtml";
 		}
-	}
+	}  */
 }
