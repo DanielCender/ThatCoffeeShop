@@ -34,6 +34,7 @@ public class AuthenticationService {
 	
 	public static void addUser(String username, String password) {
 		credentials.put(username, password);
+		System.out.println("Inside AuthenticationService, added user");
 	}
 	
 	public void showUsers() {
