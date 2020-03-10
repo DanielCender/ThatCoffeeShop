@@ -31,7 +31,9 @@ public class Database implements DatabaseInterface {
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	
-	//four CRUD operations
+	/*
+	 * 			CRUD FOR USER TABLE
+	 */
 	@Override
 	public int deleteUser(String username) throws SQLException {
 		numberOfRowsImpacted = 0;
@@ -166,6 +168,9 @@ public class Database implements DatabaseInterface {
 	}
 	
 	
+	/*
+	 * 			CRUD FOR PRODUCT TABLE
+	 */
 	
 	HashMap<String, String> credentials = new HashMap<>();
 	List<User> users = new ArrayList<User>();

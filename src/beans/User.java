@@ -8,8 +8,6 @@ import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import business.AuthenticationService;
-
 @ManagedBean @SessionScoped 
 public class User { //Will later be split into Customer and Admin classes that use User as a composition
 	@NotNull() @Size(min=2, max=15)

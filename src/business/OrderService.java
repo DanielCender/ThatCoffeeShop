@@ -6,11 +6,17 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 
 import beans.Product;
+import database.DatabaseInterface;
 
 @Stateless @Local(OrderServiceInterface.class) @Alternative
 public class OrderService implements OrderServiceInterface {
+	
+	@Inject 
+	DatabaseInterface dbi;
+	
 	List<Product> products = new ArrayList<Product>();
 	
 	public OrderService() {
