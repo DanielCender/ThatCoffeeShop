@@ -4,10 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.ejb.Local;
-
-import beans.Order;
 import beans.Product;
 import beans.User;
 
