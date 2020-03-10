@@ -23,7 +23,7 @@ public class OrderController {
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 		
-		user.getCart().add(p);
+		user.getCart().getCart().add(p);
 
 		System.out.println(user.getCart().toString());
 	}
