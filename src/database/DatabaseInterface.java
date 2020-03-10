@@ -1,11 +1,13 @@
 package database;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.Local;
 
+import beans.Order;
 import beans.Product;
 import beans.User;
 
@@ -27,4 +29,9 @@ public interface DatabaseInterface {
 	public void addCredentials(User u);
 	public boolean testCredentials(User u);
 	public boolean checkAvailability(String username);
+	
+	public int deleteUser(String username) throws SQLException;
+	public int addUser(User u) throws SQLException;
+	public ArrayList<User> loadUsers() throws SQLException;
+	public int updateUser(String username, User u) throws SQLException;
 }

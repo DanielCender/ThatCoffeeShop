@@ -13,11 +13,42 @@ import business.AuthenticationService;
 @ManagedBean @SessionScoped 
 public class User { //Will later be split into Customer and Admin classes that use User as a composition
 	@NotNull() @Size(min=2, max=15)
-	private String firstName, lastName, email, address, phone, username, password, repeatPassword, DOB, creditCardInfo;
+	private String firstName, lastName, email, address, phone, username, password, DOB, creditCardInfo;
+	Cart cart;
+	Orders orders;
 	float accountBalance = 0;
-	List<OrderDetails> orders = new ArrayList<OrderDetails>();
-	List<Product> cart = new ArrayList<Product>();
-	public static List<User> users = new ArrayList<User>();
+	public class Cart {
+		List<Product> cart = new ArrayList<Product>();
+		
+		public Cart() {}
+
+		public List<Product> getCart() {
+			return cart;
+		}
+
+		public void setCart(List<Product> cart) {
+			this.cart = cart;
+		}
+		
+		
+	}
+
+	public class Orders {
+
+		List<OrderDetails> orders = new ArrayList<OrderDetails>();
+		
+		public Orders() {}
+
+		public List<OrderDetails> getOrders() {
+			return orders;
+		}
+
+		public void setOrders(List<OrderDetails> orders) {
+			this.orders = orders;
+		}
+		
+		
+	}
 
 	public User() {
 		this.firstName = "";
@@ -27,28 +58,52 @@ public class User { //Will later be split into Customer and Admin classes that u
 		this.phone = "";
 		this.username = "def";
 		this.password = "pass";
-		cart.add(new Product("Test",(float)5.00));
+		this.DOB = "";
+		cart = new Cart();
+		cart.getCart().add(new Product("Test",(float)5.00));
+		orders = new Orders();
 	}
 	
-	//Unused method
-	public static void addUser(User user) {
-		users.add(user);
-		AuthenticationService.addUser(user.username, user.password);
-	}
 	
-	public List<Product> getCart() {
+	public Cart getCart() {
 		return cart;
 	}
 
-	public void setCart(List<Product> cart) {
+
+	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
 
-	public List<OrderDetails> getOrders() {
+
+	public String getDOB() {
+		return DOB;
+	}
+
+	public void setDOB(String dOB) {
+		DOB = dOB;
+	}
+
+	public String getCreditCardInfo() {
+		return creditCardInfo;
+	}
+
+	public void setCreditCardInfo(String creditCardInfo) {
+		this.creditCardInfo = creditCardInfo;
+	}
+
+	public float getAccountBalance() {
+		return accountBalance;
+	}
+
+	public void setAccountBalance(float accountBalance) {
+		this.accountBalance = accountBalance;
+	}
+
+	public Orders getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<OrderDetails> orders) {
+	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
 	
@@ -108,14 +163,6 @@ public class User { //Will later be split into Customer and Admin classes that u
 		this.username = username;
 	}
 	
-	public String getRepeatPassword() {
-		return repeatPassword;
-	}
-
-	public void setRepeatPassword(String repeatPassword) {
-		this.repeatPassword = repeatPassword;
-	}
-
 	public void checkout(List<Product> cart) {
 		//take the items from the cart and generate an OrderDetail and then add that OrderDetail to the User's orders list.
 		System.out.println("You've checked out!");
