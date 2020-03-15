@@ -9,6 +9,6 @@ import beans.Product;
 public interface OrderServiceInterface {
 	public void test();
 	public List<Product> getProducts();
-	public void setProducts(List<Product> products);
-	public void addProduct(String name, float price);
+	public void addProduct(Product p);
+	public void updateProduct(String productName, Product p);
 }

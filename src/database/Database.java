@@ -1,13 +1,6 @@
 package database;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
@@ -167,72 +160,145 @@ public class Database implements DatabaseInterface {
 		return numberOfRowsImpacted;
 	}
 	
+	public boolean checkCredentials(User u) throws SQLException {
+		numberOfRowsImpacted = 0;
+		String tv = u.getPassword();
+		String un = u.getUsername();
+		boolean result;
+		
+		//connect to the SQL
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		pstmt = c.prepareStatement("select * from thatcoffeeshop.user where username = ? and password = ?");
+		pstmt.setString(1, un);
+		pstmt.setString(2, tv);
+		System.out.println("SQL Statement prepared..." + pstmt);
+		//stmt = c.createStatement();
+				
+		//execute the statement into a result
+		rs = pstmt.executeQuery();
+		if(!rs.next()) {
+			System.out.println("Username and Password not found");
+			result = false;
+		} else {
+			System.out.println("Credentials found!");
+			result = true;
+		}
+		pstmt.close();
+		c.close();
+		return result;
+	}
 	
 	/*
 	 * 			CRUD FOR PRODUCT TABLE
 	 */
+	@Override
+	public int deleteProduct(String productName) throws SQLException {
+		numberOfRowsImpacted = 0;
+		
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		pstmt = c.prepareStatement("delete from thatcoffeeshop.products where name = ?");
+		pstmt.setString(1, productName);
+		
+		//execute the statement
+		numberOfRowsImpacted = pstmt.executeUpdate();
+		
+		//success msg
+		System.out.println("Rows affected " + numberOfRowsImpacted);
+
+		pstmt.close();
+		c.close();
+		
+		return numberOfRowsImpacted;
+	}
+
+	@Override
+	public int addProduct(Product p) throws SQLException {
+		numberOfRowsImpacted = 0;
+		
+		Connection c = null;
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		pstmt = c.prepareStatement("insert into thatcoffeeshop.products (id, name, price, product_desc) values (null, ?, ?, ?)");
+		pstmt.setString(1, p.getName());
+		pstmt.setFloat(2, p.getPrice());
+		pstmt.setString(3, p.getDescription());
+		
+		//execute the statement
+		numberOfRowsImpacted = pstmt.executeUpdate();
+		
+		//success msg
+		System.out.println("Rows inserted " + numberOfRowsImpacted);
+
+		pstmt.close();
+		c.close();
+		
+		return numberOfRowsImpacted;
+	}
+
+	@Override
+	public ArrayList<Product> loadProducts() throws SQLException {
+		ArrayList<Product> products = new ArrayList<>();
+		
+		//create link to SQL
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		stmt = c.createStatement();
+		
+		//execute the statement into a result
+		rs = stmt.executeQuery("select * from thatcoffeeshop.products");
+		
+		//process the rows in the result set into the list
+		while(rs.next()) {
+			Product p = new Product();
+			p.setName(rs.getString("name"));
+			p.setPrice(rs.getFloat("price"));
+			p.setDescription(rs.getString("product_desc"));
+			products.add(p);
+		}
+		
+		rs.close();
+		stmt.close();
+		c.close();
+		
+		return products;
+	}
+
+	@Override
+	public int updateProduct(String productName, Product p) throws SQLException {
+		numberOfRowsImpacted = 0;
+		
+		//connect to the SQL
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		pstmt = c.prepareStatement("update thatcoffeeshop.products set name = ?, price = ?, product_desc = ? where name = ?");
+		pstmt.setString(1, p.getName());
+		pstmt.setFloat(2, p.getPrice());
+		pstmt.setString(3, p.getDescription());
+		pstmt.setString(4, productName);
+
+		
+		//execute the statement
+		numberOfRowsImpacted = pstmt.executeUpdate();
+		
+		//success msg
+		System.out.println("Rows affected " + numberOfRowsImpacted);
+
+		pstmt.close();
+		c.close();
+		
+		return numberOfRowsImpacted;
+	}
 	
-	HashMap<String, String> credentials = new HashMap<>();
-	List<User> users = new ArrayList<User>();
-	List<Product> products = new ArrayList<Product>();
-
-	@Override
-	public List<User> getUsers() {
-		return users;
-	}
-
-	@Override
-	public void addUsers(User u) {
-		System.out.println("Adding user inside database");
-		users.add(u);
-	}
-
-	@Override
-	public void addCredentials(User u) {
-		System.out.println("Adding credentials inside database");
-		String un = u.getUsername();
-		String pw = u.getPassword();
-		credentials.put(un, pw);
-	}
-
-	@Override
-	public boolean testCredentials(User u) {
-		boolean v = false;
-		String un = u.getUsername();
-		String testValue = u.getPassword();
-		String pw = "";
-		
-		System.out.println("Testing inside Database | U: " + un + " | P: " + testValue);
-		if (credentials.containsKey(un)) {
-			pw = credentials.get(un);
-			if (pw.equals(testValue)) {
-				v = true;
-			} else {
-				v = false;
-			}
-		} else {
-			v = false;
-		}
-		return v;
-	}
-
-	@Override
-	public boolean checkAvailability(String username) {
-		System.out.println("Testing inside database for " + username + "| Size is " + users.size());
-		boolean r = false;
-		
-		if (users.size() == 0) {
-			return r;
-		} else {
-			System.out.println("Printing all usernames: " + users.toString());
-			for (int x = 0; x <= users.size(); x++) {
-				System.out.println("Testing pos " + x + ".. |U: " + users.get(x).getUsername() + " |I: " + username);
-				if (users.get(x).getUsername().equals(username)) {
-					r = true;
-					break;
-				}
-			}
-		}
-		return r;
-	}
 }

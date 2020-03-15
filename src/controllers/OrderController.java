@@ -38,8 +38,16 @@ public class OrderController {
 		
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
 
-		services.addProduct(product.getName(), product.getPrice());
+		services.addProduct(product);
 		
+	}
+	
+	public void onUpdateProduct() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Product product = context.getApplication().evaluateExpressionGet(context, "#{product}", Product.class);
 		
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
+
+		services.updateProduct(product.getName(), product);
 	}
 }

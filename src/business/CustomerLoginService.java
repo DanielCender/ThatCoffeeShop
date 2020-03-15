@@ -1,12 +1,14 @@
 package business;
 
-import java.util.HashMap;
+import java.sql.SQLException;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 
 import beans.User;
+import database.DatabaseInterface;
 
 
 @Stateless
@@ -14,17 +16,23 @@ import beans.User;
 @Alternative
 public class CustomerLoginService implements LoginInterface {
 
+	@Inject 
+	DatabaseInterface dbi;
 	
-	public CustomerLoginService() {
-		AuthenticationService.credentials.put("testuser", "testpass");
-	}
+	public CustomerLoginService() {}
 	
 	@Override
-	public boolean testCredentials(String u, String p) {
+	public boolean testCredentials(User u) {
+		boolean auth = false;
 		System.out.println("testCredentials called in CustomerLoginService");
 		
-		//testing users input to hash table containing login information
-		boolean auth = AuthenticationService.authenticate(u, p);
+		//testing users input to user database
+		try {
+			auth = dbi.checkCredentials(u);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " Failed to check credentials...");
+			e.printStackTrace();
+		}
 		System.out.println("boolean auth reads = " + auth);
 		if (auth == true) {
 			System.out.println("User authenticated");
@@ -34,22 +42,4 @@ public class CustomerLoginService implements LoginInterface {
 			return false;
 		}
 	}
-
-	@Override
-	public void test() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public HashMap<String, String> getCredentials() {
-		return AuthenticationService.credentials;
-	}
-
-	@Override
-	public void addCredentials(User user) {
-		AuthenticationService.credentials.put(user.getUsername(), user.getPassword());
-	}
-
-	
 }

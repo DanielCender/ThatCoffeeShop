@@ -11,7 +11,7 @@
 	<ui:composition template="/Layouts/commonLayout.xhtml">
 		<ui:define name="content">
 			<h:form >
-				<table align="center">
+				<table>
 					<tr>
 						<td>First Name:</td>
 						<td>
@@ -65,14 +65,6 @@
 						<td> 
 							<h:inputText label="Password"
 							id="pass" value="#{user.password}"
-							required="true" />
-						</td>
-					</tr>
-					<tr>
-						<td>Repeat Password:</td>
-						<td> 
-							<h:inputText label="Repeat Password"
-							id="repass" value="#{user.repeatPassword}"
 							required="true" />
 						</td>
 					</tr>

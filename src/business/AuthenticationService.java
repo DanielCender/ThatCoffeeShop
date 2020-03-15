@@ -1,4 +1,6 @@
-package business;
+/*
+ package business;
+
 
 import java.util.HashMap;
 
@@ -41,3 +43,5 @@ public class AuthenticationService {
 		System.out.print(credentials);
 	}
 }
+
+ */

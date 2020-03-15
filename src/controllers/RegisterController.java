@@ -23,11 +23,6 @@ public class RegisterController {
 		
 		//Put user object into POST
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-		
-	/*	//Adds credentials to Hash Map in AuthenticationController
-		AuthenticationService.addUser(user.getUsername(), user.getPassword());
-		User.addUser(user);
-	*/	
 		services.addUser(user);
 		
 		//show next page

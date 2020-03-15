@@ -21,14 +21,15 @@ public interface DatabaseInterface {
 	List<User> users = new ArrayList<User>();
 	List<Product> products = new ArrayList<Product>();
 	
-	public List<User> getUsers();
-	public void addUsers(User u);
-	public void addCredentials(User u);
-	public boolean testCredentials(User u);
-	public boolean checkAvailability(String username);
 	
 	public int deleteUser(String username) throws SQLException;
 	public int addUser(User u) throws SQLException;
 	public ArrayList<User> loadUsers() throws SQLException;
 	public int updateUser(String username, User u) throws SQLException;
+	public boolean checkCredentials(User u) throws SQLException;
+	
+	public int deleteProduct(String productName) throws SQLException;
+	public int addProduct(Product p) throws SQLException;
+	public ArrayList<Product> loadProducts() throws SQLException;
+	public int updateProduct(String productName, Product p) throws SQLException;
 }

@@ -1,21 +1,19 @@
 package controllers;
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import beans.User;
 import business.LoginInterface;
-import database.DatabaseInterface;
 
 @ManagedBean @ViewScoped 
 public class LoginController {
 	
-	@Inject
-	LoginInterface credentials;
 	
 	@Inject
-	DatabaseInterface db;
+	LoginInterface login;
 	
 	public String onSubmit() {
 		//get the user value from the input form.
@@ -27,11 +25,10 @@ public class LoginController {
 
 		//Checks username and password.
 		System.out.println("Testing Credentials... username = " + user.getUsername() + " password = " + user.getPassword());
-		boolean auth = db.testCredentials(user);
+		boolean auth = login.testCredentials(user);
 		System.out.println("boolean auth reads = " + auth);
 		if (auth == true) {
 			System.out.println("User authenticated");
-			//load user into session
 		} else {
 			System.out.println("User Credentials WRONG");
 		}

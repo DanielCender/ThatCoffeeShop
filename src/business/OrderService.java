@@ -1,5 +1,6 @@
 package business;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +35,33 @@ public class OrderService implements OrderServiceInterface {
 
 	@Override
 	public List<Product> getProducts() {
+		try {
+			products = dbi.loadProducts();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to load products...");
+			e.printStackTrace();
+		}
 		return products;
 	}
 
 	@Override
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void addProduct(Product p) {
+		try {
+			dbi.addProduct(p);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to add product...");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void addProduct(String name, float price) {
-		products.add(new Product(name, (float)price));
+	public void updateProduct(String productName, Product p) {
+		try {
+			dbi.updateProduct(productName, p);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to update product...");
+			e.printStackTrace();
+		}
 	}
 
 }

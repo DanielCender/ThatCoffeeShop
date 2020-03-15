@@ -15,6 +15,7 @@ public class User { //Will later be split into Customer and Admin classes that u
 	Cart cart;
 	Orders orders;
 	float accountBalance = 0;
+	
 	public class Cart {
 		List<Product> cart = new ArrayList<Product>();
 		

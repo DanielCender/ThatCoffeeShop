@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 public class Product {
 	String name;
 	float price;
+	String description;
 	
 	public Product(String name, float price) {
 		super();
@@ -28,6 +29,12 @@ public class Product {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
