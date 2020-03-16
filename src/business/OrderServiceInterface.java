@@ -1,10 +1,7 @@
 package business;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Local;
-
 import beans.Product;
 
 @Local

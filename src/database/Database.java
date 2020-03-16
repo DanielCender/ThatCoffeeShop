@@ -125,6 +125,42 @@ public class Database implements DatabaseInterface {
 	}
 	
 	@Override
+	public User loadUser(String username) throws SQLException {
+		User loaded_user = new User();
+		//connect to the SQL
+		c = DriverManager.getConnection(dbURL, user, password);
+		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
+
+		//create a SQL statement
+		pstmt = c.prepareStatement("select * from thatcoffeeshop.user where username = ?");
+		pstmt.setString(1, username);
+		System.out.println("SQL Statement prepared..." + pstmt);
+				
+		//execute the statement into a result
+		rs = pstmt.executeQuery();
+		if(!rs.next()) {
+			System.out.println("Username not found");
+		} else {
+			System.out.println("Credentials found!");
+			loaded_user.setFirstName(rs.getString("firstname"));
+			loaded_user.setLastName(rs.getString("lastname"));
+			loaded_user.setEmail(rs.getString("email"));
+			loaded_user.setAddress(rs.getString("address"));
+			loaded_user.setPhone(rs.getString("phone"));
+			loaded_user.setDOB(rs.getString("dob"));
+			loaded_user.setCreditCardInfo(rs.getString("ccinfo"));
+			loaded_user.setAccountBalance(rs.getFloat("balance"));
+			//loaded_user.setOrders((Orders) rs.getObject("orders"));
+			//loaded_user.setCart((Cart) rs.getObject("cart"));
+		}
+		
+		pstmt.close();
+		c.close();
+		
+		return loaded_user;
+	}
+	
+	@Override
 	public int updateUser(String username, User u) throws SQLException {
 		numberOfRowsImpacted = 0;
 		

@@ -1,6 +1,8 @@
 package controllers;
 
 
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -19,23 +21,28 @@ public class LoginController {
 		//get the user value from the input form.
 		FacesContext context = FacesContext.getCurrentInstance();
 		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
-		
-		//Put user object into POST
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 
 		//Checks username and password.
 		System.out.println("Testing Credentials... username = " + user.getUsername() + " password = " + user.getPassword());
 		boolean auth = login.testCredentials(user);
 		System.out.println("boolean auth reads = " + auth);
 		if (auth == true) {
-			System.out.println("User authenticated");
-			
+			try {
+				user = login.loadUser(user.getUsername());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			System.out.println("User authenticated. " + user.getUsername() + " " + user.getFirstName());
+			//Put user object into POST
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
+			//show next page
+			return "order.xhtml";
 		} else {
 			System.out.println("User Credentials WRONG");
+			//show next page
+			return "index.xhtml";
 		}
 		
-		//show next page
-		return "index.xhtml";
 	}
 	
 /*	public String login() {

@@ -42,4 +42,11 @@ public class CustomerLoginService implements LoginInterface {
 			return false;
 		}
 	}
+
+	@Override
+	public User loadUser(String username) throws SQLException {
+		return dbi.loadUser(username);
+	}
+	
+	
 }
