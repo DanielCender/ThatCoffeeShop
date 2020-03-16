@@ -13,7 +13,7 @@
 		<p>Hello #{user.firstName} #{user.lastName}.</p>
 				<p>Please order from the list below...</p>
 				
-				<h:dataTable value="#{orderController.service.products}" var="p" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd, order-table-even">
+				<h:dataTable value="#{orderController.service.loadProducts()}" var="p" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd, order-table-even">
 					<h:column>
 						<f:facet name="header">Product Name</f:facet>
 						#{p.name}
@@ -25,11 +25,17 @@
 						</h:outputText>
 					</h:column>
 					<h:column>
+						<f:facet name="header">Buy?</f:facet>
 						<h:form>
 							<h:commandButton action="#{orderController.onAddToCart(p)}" value="Add to cart" />
 						</h:form>
 					</h:column>
-					
+					<h:column>
+						<f:facet name="header">Delete</f:facet>
+						<h:form>
+							<h:commandButton action="#{orderController.onDelete(p)}" value="Del" />
+						</h:form>
+					</h:column>		
 				</h:dataTable>
 				
 				<h:form>

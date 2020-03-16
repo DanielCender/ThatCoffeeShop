@@ -17,6 +17,11 @@ body {
 	text-align: center;
 }
 
+table {
+	margin:auto;
+	width:20%;
+}
+
 .order-table-header {
 	font-weight: bold;
 }

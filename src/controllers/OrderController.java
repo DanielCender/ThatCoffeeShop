@@ -1,10 +1,10 @@
 package controllers;
 
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-
 import beans.Product;
 import beans.User;
 import business.OrderServiceInterface;
@@ -49,5 +49,9 @@ public class OrderController {
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
 
 		services.updateProduct(product.getName(), product);
+	}
+	
+	public void onDelete(Product p) throws SQLException {
+		services.deleteProduct(p.getName());
 	}
 }

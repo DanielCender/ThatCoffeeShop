@@ -29,6 +29,7 @@ public class LoginController {
 		System.out.println("boolean auth reads = " + auth);
 		if (auth == true) {
 			System.out.println("User authenticated");
+			
 		} else {
 			System.out.println("User Credentials WRONG");
 		}

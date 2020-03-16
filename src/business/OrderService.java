@@ -20,12 +20,7 @@ public class OrderService implements OrderServiceInterface {
 	
 	List<Product> products = new ArrayList<Product>();
 	
-	public OrderService() {
-		//load product information to be listed on the product pages
-		products.add(new Product("Coffee", (float)5.00));
-		products.add(new Product("Tea", (float)2.00));
-		products.add(new Product("Espresso", (float)3.00));
-	}
+	public OrderService() {	}
 	
 	@Override
 	public void test() {
@@ -34,14 +29,14 @@ public class OrderService implements OrderServiceInterface {
 	}
 
 	@Override
-	public List<Product> getProducts() {
+	public ArrayList<Product> loadProducts() {
 		try {
 			products = dbi.loadProducts();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + "Failed to load products...");
 			e.printStackTrace();
 		}
-		return products;
+		return (ArrayList<Product>) products;
 	}
 
 	@Override
@@ -60,6 +55,16 @@ public class OrderService implements OrderServiceInterface {
 			dbi.updateProduct(productName, p);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + "Failed to update product...");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteProduct(String productName) {
+		try {
+			dbi.deleteProduct(productName);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to delete product...");
 			e.printStackTrace();
 		}
 	}
