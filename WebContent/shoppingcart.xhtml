@@ -11,17 +11,17 @@
 	<ui:composition template="/Layouts/commonLayout.xhtml">
 		<ui:define name="content">
 		This is #{user.firstName} 's shopping cart page.
-		<h:dataTable value="#{user.cart}" var="c" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd, order-table-even">
-					<h:column>
-						<f:facet name="header">Product Name</f:facet>
-						#{c.cart.}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Product Price</f:facet>
-						<h:outputText value="#{c.price}" >
-							<f:convertNumber type="currency" />
-						</h:outputText>
-					</h:column>
+		<h:dataTable value="#{user.cart.cart}" var="c" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd, order-table-even">
+			<h:column>
+				<f:facet name="header">Product Name</f:facet>
+				<h:outputText value="#{c.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Product Price</f:facet>
+					<h:outputText value="#{c.price}" >
+						<f:convertNumber type="currency" />
+					</h:outputText>
+			</h:column>
 		</h:dataTable>
 			<h:form>
 				<h:commandButton action="#{cartController.onCheckout()}" value="Checkout" />

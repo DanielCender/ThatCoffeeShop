@@ -7,7 +7,7 @@ body {
 	background-color: #DDD;
 }
 
-.order-table {
+.order-table, table {
 	border:1px solid black;
 	margin: auto;
 	width:80%;
