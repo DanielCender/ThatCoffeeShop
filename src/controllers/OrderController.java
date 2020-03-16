@@ -48,10 +48,24 @@ public class OrderController {
 		
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", product);
 
-		services.updateProduct(product.getName(), product);
+		services.updateProduct(product.getId(), product);
 	}
 	
 	public void onDelete(Product p) throws SQLException {
 		services.deleteProduct(p.getName());
+	}	
+	
+	public String onEdit(Product p) {
+		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("product", p);
+		System.out.println(p.getId() + "  ID   ======");
+		return "editproduct.xhtml";
+	}
+	
+	public String onSubmitEdit() throws SQLException { 		//User to add new item to database
+		FacesContext context = FacesContext.getCurrentInstance();
+		Product p = context.getApplication().evaluateExpressionGet(context, "#{product}", Product.class);  // p holds the value of the submitted object
+		System.out.println(p.getName() + " " + p.getId() + " is being held as an object.");
+		services.updateProduct(p.getId(), p);
+		return "order.xhtml";
 	}
 }

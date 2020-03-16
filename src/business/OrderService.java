@@ -50,9 +50,9 @@ public class OrderService implements OrderServiceInterface {
 	}
 
 	@Override
-	public void updateProduct(String productName, Product p) {
+	public void updateProduct(int id, Product p) {
 		try {
-			dbi.updateProduct(productName, p);
+			dbi.updateProduct(id, p);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + "Failed to update product...");
 			e.printStackTrace();

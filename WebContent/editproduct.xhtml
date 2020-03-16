@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	  
+	<h:head>
+		<title><ui:insert name="pageTitle">ThatCoffeeShop - Edit</ui:insert></title>
+	</h:head>
+
+	<h:body>
+	<ui:composition template="/Layouts/commonLayout.xhtml">
+		<ui:define name="content">
+		<p>Hello #{user.firstName} #{user.lastName}.</p>
+				<p>Please make your edits below...</p>
+					<h:form>
+						<h:inputHidden value="#{product.id}" />
+						<BR></BR>
+						Product Name: <h:inputText value="#{product.name}" />
+						<BR></BR>
+						Price: <h:inputText value="#{product.price}" />
+						<BR></BR>
+						<BR></BR><BR></BR>
+						<h:commandButton action="#{orderController.onSubmitEdit()}" value="Update Order" />
+					</h:form>
+				<h:messages />
+		
+		</ui:define>
+	</ui:composition>
+	
+	</h:body>
+
+</html>

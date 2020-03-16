@@ -13,5 +13,5 @@ public interface OrderServiceInterface {
 	public void deleteProduct(String productName);
 	public void addProduct(Product p);
 	public ArrayList<Product> loadProducts();
-	public void updateProduct(String productName, Product p);
+	public void updateProduct(int id, Product p);
 }

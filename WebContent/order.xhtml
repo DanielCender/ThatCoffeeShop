@@ -35,6 +35,12 @@
 						<h:form>
 							<h:commandButton action="#{orderController.onDelete(p)}" value="Del" />
 						</h:form>
+					</h:column>	
+					<h:column>
+						<f:facet name="header">Edit</f:facet>
+						<h:form>
+							<h:commandButton action="#{orderController.onEdit(p)}" value="Edit" />
+						</h:form>
 					</h:column>		
 				</h:dataTable>
 				

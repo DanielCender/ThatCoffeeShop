@@ -260,6 +260,7 @@ public class Database implements DatabaseInterface {
 		//process the rows in the result set into the list
 		while(rs.next()) {
 			Product p = new Product();
+			p.setId(rs.getInt("id"));
 			p.setName(rs.getString("name"));
 			p.setPrice(rs.getFloat("price"));
 			p.setDescription(rs.getString("product_desc"));
@@ -274,7 +275,7 @@ public class Database implements DatabaseInterface {
 	}
 
 	@Override
-	public int updateProduct(String productName, Product p) throws SQLException {
+	public int updateProduct(int id, Product p) throws SQLException {
 		numberOfRowsImpacted = 0;
 		
 		//connect to the SQL
@@ -282,11 +283,11 @@ public class Database implements DatabaseInterface {
 		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
 
 		//create a SQL statement
-		pstmt = c.prepareStatement("update thatcoffeeshop.products set name = ?, price = ?, product_desc = ? where name = ?");
+		pstmt = c.prepareStatement("update thatcoffeeshop.products set name = ?, price = ?, product_desc = ? where id = ?");
 		pstmt.setString(1, p.getName());
 		pstmt.setFloat(2, p.getPrice());
 		pstmt.setString(3, p.getDescription());
-		pstmt.setString(4, productName);
+		pstmt.setInt(4, id);
 
 		
 		//execute the statement
@@ -300,5 +301,4 @@ public class Database implements DatabaseInterface {
 		
 		return numberOfRowsImpacted;
 	}
-	
 }

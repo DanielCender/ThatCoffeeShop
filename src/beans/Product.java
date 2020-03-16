@@ -6,6 +6,7 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class Product {
+	int id;
 	String name;
 	float price;
 	String description;
@@ -18,6 +19,16 @@ public class Product {
 	
 	public Product() {}
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

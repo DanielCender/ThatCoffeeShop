@@ -31,5 +31,5 @@ public interface DatabaseInterface {
 	public int deleteProduct(String productName) throws SQLException;
 	public int addProduct(Product p) throws SQLException;
 	public ArrayList<Product> loadProducts() throws SQLException;
-	public int updateProduct(String productName, Product p) throws SQLException;
+	public int updateProduct(int id, Product p) throws SQLException;
 }
