@@ -8,8 +8,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 import beans.Product;
 import beans.User;
-import beans.User.Cart;
-import beans.User.Orders;
 
 @Stateless
 @Local(DatabaseInterface.class)
@@ -114,8 +112,8 @@ public class Database implements DatabaseInterface {
 			user.setDOB(rs.getString("dob"));
 			user.setCreditCardInfo(rs.getString("ccinfo"));
 			user.setAccountBalance(rs.getFloat("balance"));
-			user.setOrders((Orders) rs.getObject("orders"));
-			user.setCart((Cart) rs.getObject("cart"));
+			//user.setOrders((Orders) rs.getObject("orders"));
+			//user.setCart((Cart) rs.getObject("cart"));
 			users.add(user);
 		}
 		
@@ -127,15 +125,16 @@ public class Database implements DatabaseInterface {
 	}
 	
 	@Override
-	public User loadUser(String username) throws SQLException {
+	public User loadUser(int id) {
 		User loaded_user = new User();
 		//connect to the SQL
-		c = DriverManager.getConnection(dbURL, user, password);
+		try {
+			c = DriverManager.getConnection(dbURL, user, password);
 		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
 
 		//create a SQL statement
-		pstmt = c.prepareStatement("select * from thatcoffeeshop.user where username = ?");
-		pstmt.setString(1, username);
+		pstmt = c.prepareStatement("select * from thatcoffeeshop.user where id = ?");
+		pstmt.setInt(1, id);
 		System.out.println("SQL Statement prepared..." + pstmt);
 				
 		//execute the statement into a result
@@ -158,12 +157,17 @@ public class Database implements DatabaseInterface {
 		
 		pstmt.close();
 		c.close();
-		
+
 		return loaded_user;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
-	public int updateUser(String username, User u) throws SQLException {
+	public int updateUser(int id, User u) throws SQLException {
 		numberOfRowsImpacted = 0;
 		
 		//connect to the SQL
@@ -171,7 +175,7 @@ public class Database implements DatabaseInterface {
 		System.out.println("Connection Successful!    " + dbURL + " User: " + user + " PW: " + password);
 
 		//create a SQL statement
-		pstmt = c.prepareStatement("update thatcoffeeshop.user set firstname = ?, lastname = ?, email = ?, address = ?, phone = ?, password = ?, dob = ?, ccinfo = ?, balance = ?, orders = ?, cart  = ? where username = ?");
+		pstmt = c.prepareStatement("update thatcoffeeshop.user set firstname = ?, lastname = ?, email = ?, address = ?, phone = ?, password = ?, dob = ?, ccinfo = ?, balance = ?, orders = ?, cart  = ? where id = ?");
 		pstmt.setString(1, u.getFirstName());
 		pstmt.setString(2, u.getLastName());
 		pstmt.setString(3, u.getEmail());
@@ -183,7 +187,7 @@ public class Database implements DatabaseInterface {
 		pstmt.setFloat(9, u.getAccountBalance());
 		pstmt.setObject(10, u.getOrders());
 		pstmt.setObject(11, u.getCart());
-		pstmt.setString(12, u.getUsername());
+		pstmt.setInt(12, u.getId());
 
 		
 		//execute the statement
@@ -227,6 +231,35 @@ public class Database implements DatabaseInterface {
 		pstmt.close();
 		c.close();
 		return result;
+	}
+	
+	@Override
+	public ArrayList<User> searchUsers(String name) {
+		ArrayList<User> ulist = new ArrayList<User>();
+		try {
+			c = DriverManager.getConnection(dbURL, user, password);
+		
+			pstmt = c.prepareStatement("SELECT * FROM `thatcoffeeshop`.`user` WHERE `username` LIKE ?");
+			pstmt.setString(1, "%"+name+"%");
+			System.out.println("SQL Statement prepared..." + pstmt);
+					
+			//execute the statement into a result
+			rs = pstmt.executeQuery();
+			if(!rs.next()) {
+				System.out.println("User not found");
+			} else {
+				while (rs.next()) {
+					User u = new User();
+					u.setUsername(rs.getString("username"));
+					u.setPassword(rs.getString("password"));
+					ulist.add(u);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ulist;
 	}
 	
 	/*
@@ -339,4 +372,65 @@ public class Database implements DatabaseInterface {
 		
 		return numberOfRowsImpacted;
 	}
+	
+	@Override
+	public Product findByID(int id){
+		Product p = new Product();
+		try {
+			c = DriverManager.getConnection(dbURL, user, password);
+		
+			pstmt = c.prepareStatement("select * from thatcoffeeshop.products where id = ?");
+			pstmt.setInt(1, id);
+			System.out.println("SQL Statement prepared..." + pstmt);
+					
+			//execute the statement into a result
+			rs = pstmt.executeQuery();
+			if(!rs.next()) {
+				System.out.println("Product not found");
+			} else {
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setDescription(rs.getString("product_desc"));
+				p.setPrice(rs.getFloat("price"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	@Override
+	public ArrayList<Product> searchForProduct(String name) {
+		ArrayList<Product> plist = new ArrayList<Product>();
+		try {
+			c = DriverManager.getConnection(dbURL, user, password);
+		
+			pstmt = c.prepareStatement("select * from thatcoffeeshop.products where name LIKE ?");
+			pstmt.setString(1, "%"+name+"%");
+			System.out.println("SQL Statement prepared..." + pstmt);
+					
+			//execute the statement into a result
+			rs = pstmt.executeQuery();
+			if(!rs.next()) {
+				System.out.println("Product not found");
+			} else {
+				while (rs.next()) {
+					Product p = new Product();
+					p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setDescription(rs.getString("product_desc"));
+					p.setPrice(rs.getFloat("price"));
+					plist.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plist;
+	}
+
+	
 }

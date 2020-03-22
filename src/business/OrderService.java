@@ -19,24 +19,16 @@ public class OrderService implements OrderServiceInterface {
 	DatabaseInterface dbi;
 	
 	List<Product> products = new ArrayList<Product>();
-	
-	public OrderService() {	}
-	
-	@Override
-	public void test() {
-		System.out.println("Order Serivce Initiated.");
-
-	}
 
 	@Override
 	public List<Product> loadProducts() {
 		try {
-			products = dbi.loadProducts();
+			return dbi.loadProducts();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to load products...");
+			System.out.println(e.getMessage() + " | Failed to load products...");
 			e.printStackTrace();
+			return null;
 		}
-		return products;
 	}
 
 	@Override
@@ -44,7 +36,7 @@ public class OrderService implements OrderServiceInterface {
 		try {
 			dbi.addProduct(p);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to add product...");
+			System.out.println(e.getMessage() + " | Failed to add product...");
 			e.printStackTrace();
 		}
 	}
@@ -54,7 +46,7 @@ public class OrderService implements OrderServiceInterface {
 		try {
 			dbi.updateProduct(id, p);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to update product...");
+			System.out.println(e.getMessage() + " | Failed to update product...");
 			e.printStackTrace();
 		}
 	}
@@ -64,9 +56,19 @@ public class OrderService implements OrderServiceInterface {
 		try {
 			dbi.deleteProduct(productName);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to delete product...");
+			System.out.println(e.getMessage() + " | Failed to delete product...");
 			e.printStackTrace();
 		}
 	}
 
+	@Override
+	public Product findByID(int id) {
+		return dbi.findByID(id);
+	}
+
+	@Override
+	public ArrayList<Product> searchFor(String name) {
+		return dbi.searchForProduct(name);
+	}
+	
 }

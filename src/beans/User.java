@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 public class User { //Will later be split into Customer and Admin classes that use User as a composition
 	@NotNull() @Size(min=2, max=15)
 	private String firstName, lastName, email, address, phone, username, password, DOB, creditCardInfo;
+	int id;
 	Cart cart;
 	Orders orders;
 	float accountBalance = 0;
@@ -28,8 +29,6 @@ public class User { //Will later be split into Customer and Admin classes that u
 		public void setCart(List<Product> cart) {
 			this.cart = cart;
 		}
-		
-		
 	}
 
 	public class Orders {
@@ -45,8 +44,6 @@ public class User { //Will later be split into Customer and Admin classes that u
 		public void setOrders(List<OrderDetails> orders) {
 			this.orders = orders;
 		}
-		
-		
 	}
 
 	public User() {
@@ -64,6 +61,16 @@ public class User { //Will later be split into Customer and Admin classes that u
 	}
 	
 	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public Cart getCart() {
 		return cart;
 	}

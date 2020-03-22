@@ -18,10 +18,6 @@ public class UserService implements UserInterface {
 
 	@Inject 
 	DatabaseInterface dbi;
-
-	List<User> users = new ArrayList<User>();
-	
-	public UserService() {}
 	
 	@Override
 	public boolean testCredentials(User u) {
@@ -32,7 +28,7 @@ public class UserService implements UserInterface {
 		try {
 			auth = dbi.checkCredentials(u);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " Failed to check credentials...");
+			System.out.println(e.getMessage() + " | Failed to check credentials...");
 			e.printStackTrace();
 		}
 		System.out.println("boolean auth reads = " + auth);
@@ -46,19 +42,19 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public User loadUser(String username) throws SQLException {
-		return dbi.loadUser(username);
+	public User loadUser(int id) {
+		return dbi.loadUser(id);
 	}
 
 	@Override
 	public List<User> loadUsers() {
 		try {
-			users = dbi.loadUsers();
+			return dbi.loadUsers();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to load users...");
+			System.out.println(e.getMessage() + " | Failed to load users...");
 			e.printStackTrace();
+			return null;
 		}
-		return users;
 	}
 
 	@Override
@@ -66,9 +62,14 @@ public class UserService implements UserInterface {
 		try {
 			dbi.addUser(user);
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "Failed to add user...");
+			System.out.println(e.getMessage() + " | Failed to add user...");
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ArrayList<User> searchFor(String name) {
+		return dbi.searchUsers(name);
 	}
 	
 	

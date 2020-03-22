@@ -25,12 +25,15 @@ public interface DatabaseInterface {
 	public int deleteUser(String username) throws SQLException;
 	public int addUser(User u) throws SQLException;
 	public List<User> loadUsers() throws SQLException;
-	public int updateUser(String username, User u) throws SQLException;
+	public int updateUser(int id, User u) throws SQLException;
+	public User loadUser(int id);
+	public ArrayList<User> searchUsers(String name);
 	public boolean checkCredentials(User u) throws SQLException;
-	public User loadUser(String username) throws SQLException;
 	
 	public int deleteProduct(String productName) throws SQLException;
 	public int addProduct(Product p) throws SQLException;
 	public List<Product> loadProducts() throws SQLException;
 	public int updateProduct(int id, Product p) throws SQLException;
+	public Product findByID(int id);
+	public ArrayList<Product> searchForProduct(String name);
 }
