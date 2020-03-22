@@ -15,6 +15,8 @@ public class OrderDetails {
 	float totalPrice = 0;
 	int totalItemQuantity = 0;
 	
+	public OrderDetails() {}
+	
 	public OrderDetails(String dateCreated) {
 		super();
 		this.dateCreated = dateCreated;

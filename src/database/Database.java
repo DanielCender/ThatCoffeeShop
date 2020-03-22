@@ -1,6 +1,8 @@
 package database;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
@@ -280,8 +282,8 @@ public class Database implements DatabaseInterface {
 	}
 
 	@Override
-	public ArrayList<Product> loadProducts() throws SQLException {
-		ArrayList<Product> products = new ArrayList<>();
+	public List<Product> loadProducts() throws SQLException {
+		List<Product> products = new ArrayList<>();
 		
 		//create link to SQL
 		c = DriverManager.getConnection(dbURL, user, password);

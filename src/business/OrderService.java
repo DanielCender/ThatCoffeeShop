@@ -29,14 +29,14 @@ public class OrderService implements OrderServiceInterface {
 	}
 
 	@Override
-	public ArrayList<Product> loadProducts() {
+	public List<Product> loadProducts() {
 		try {
 			products = dbi.loadProducts();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + "Failed to load products...");
 			e.printStackTrace();
 		}
-		return (ArrayList<Product>) products;
+		return products;
 	}
 
 	@Override

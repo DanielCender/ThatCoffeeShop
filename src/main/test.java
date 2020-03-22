@@ -2,6 +2,7 @@ package main;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Product;
 import beans.User;
@@ -19,7 +20,7 @@ public class test {
 		
 		db.checkCredentials(u);
 		
-		ArrayList<Product> products = new ArrayList<Product>();
+		List<Product> products = new ArrayList<Product>();
 		products = db.loadProducts();
 		int x = 1;
 		for (Product pr : products) {
