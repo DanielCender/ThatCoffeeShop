@@ -14,7 +14,7 @@ import beans.Product;
 @Path("/products")
 @Produces("application/json")
 @Consumes("application/json")
-public class OrdersRestService {
+public class ProductsRestService {
 	
 	@Inject
 	OrderServiceInterface osi;
@@ -22,7 +22,7 @@ public class OrdersRestService {
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Product> getAllOrders() {
+	public List<Product> getAllProducts() {
 		System.out.println("test");
 		return osi.loadProducts();		
 	}
