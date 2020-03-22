@@ -24,7 +24,7 @@ public interface DatabaseInterface {
 	
 	public int deleteUser(String username) throws SQLException;
 	public int addUser(User u) throws SQLException;
-	public ArrayList<User> loadUsers() throws SQLException;
+	public List<User> loadUsers() throws SQLException;
 	public int updateUser(String username, User u) throws SQLException;
 	public boolean checkCredentials(User u) throws SQLException;
 	public User loadUser(String username) throws SQLException;

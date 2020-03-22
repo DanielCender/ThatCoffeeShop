@@ -1,20 +1,17 @@
 package controllers;
 
-
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-
 import beans.User;
-import business.RegisterInterface;
+import business.UserInterface;
 
 @ManagedBean @ViewScoped 
 public class RegisterController {
 	
 	@Inject
-	RegisterInterface services;
+	UserInterface services;
 	
 	public String onSubmit() {
 		//get the user value from the input form.

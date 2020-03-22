@@ -1,25 +1,27 @@
 package business;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
-
 import beans.User;
 import database.DatabaseInterface;
 
 
 @Stateless
-@Local(LoginInterface.class)
+@Local(UserInterface.class)
 @Alternative
-public class CustomerLoginService implements LoginInterface {
+public class UserService implements UserInterface {
 
 	@Inject 
 	DatabaseInterface dbi;
+
+	List<User> users = new ArrayList<User>();
 	
-	public CustomerLoginService() {}
+	public UserService() {}
 	
 	@Override
 	public boolean testCredentials(User u) {
@@ -46,6 +48,27 @@ public class CustomerLoginService implements LoginInterface {
 	@Override
 	public User loadUser(String username) throws SQLException {
 		return dbi.loadUser(username);
+	}
+
+	@Override
+	public List<User> loadUsers() {
+		try {
+			users = dbi.loadUsers();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to load users...");
+			e.printStackTrace();
+		}
+		return users;
+	}
+
+	@Override
+	public void addUser(User user) {
+		try {
+			dbi.addUser(user);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + "Failed to add user...");
+			e.printStackTrace();
+		}
 	}
 	
 	

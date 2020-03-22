@@ -90,8 +90,8 @@ public class Database implements DatabaseInterface {
 	}
 
 	@Override
-	public ArrayList<User> loadUsers() throws SQLException {
-		ArrayList<User> users = new ArrayList<>();
+	public List<User> loadUsers() throws SQLException {
+		List<User> users = new ArrayList<>();
 		
 		//create link to SQL
 		c = DriverManager.getConnection(dbURL, user, password);
