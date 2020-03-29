@@ -14,8 +14,9 @@
 		<h:link value="About Us" outcome="aboutus" />  | 
 		<h:link value="Shopping Cart" outcome="shoppingcart" />  | 
 		<h:link value="Locations" outcome="location" /> |         
-		<h:link value="Login" outcome="login" />  | 
-		<h:link value="Register" outcome="register" />
+		<h:link value="Login" outcome="newLogin" />  | 
+		<h:link value="Register" outcome="register" />  |        
+		<h:link value="logout" action="#{loginController.onLogoff()}" />
 		<P></P>
 	</ui:composition>
 

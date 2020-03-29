@@ -37,4 +37,13 @@ public class LoginController {
 			return "index.xhtml";
 		}
 	}
+	
+	public String onLogoff() {
+		// Invalidate the Session to clear the security token
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			
+		// Redirect to a protected page (so we get a full HTTP Request) to get Login Page
+		return "testResponse.xhtml?faces-redirect=true";
+
+	}
 }
