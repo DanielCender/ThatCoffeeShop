@@ -1,0 +1,22 @@
+ <html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	  
+	<h:head>
+		<title><ui:insert name="pageTitle">ThatCoffeeShop - Login</ui:insert></title>
+	</h:head>
+
+	<h:body>
+		<ui:composition template="/Layouts/commonLayout.xhtml">
+			<ui:define name="content">
+				<form  method="post" action="j_security_check">
+					Username: <h:inputText id="j_username" autocomplete="off" /><br/>
+					Password: <h:inputSecret id="j_password" autocomplete="off" /><br/>
+					<h:commandButton type="submit" value="Submit" />
+				</form>
+				<h:messages />
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
