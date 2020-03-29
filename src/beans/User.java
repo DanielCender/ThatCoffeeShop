@@ -1,10 +1,12 @@
 package beans;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -178,5 +180,17 @@ public class User { //Will later be split into Customer and Admin classes that u
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address
 				+ ", phone=" + phone + ", username=" + username + ", password=" + password + ", DOB=" + DOB + "]";
+	}
+	
+	public void init() {
+		// Get the logged in Principle
+		Principal principle = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+		if(principle == null) {
+			setFirstName("Unknown");
+			setLastName("");
+		} else {
+			setFirstName(principle.getName());
+			setLastName("");
+		}
 	}
 }
