@@ -15,8 +15,10 @@
 		<h:link value="Shopping Cart" outcome="shoppingcart" />  | 
 		<h:link value="Locations" outcome="location" /> |         
 		<h:link value="Login" outcome="newLogin" />  | 
-		<h:link value="Register" outcome="register" />  |        
-		<h:link value="logout" action="#{loginController.onLogoff()}" />
+		<h:link value="Register" outcome="register" />  |
+		<h:form>        
+			<h:commandLink value="Logout" action="#{loginController.onLogoff()}" />
+		</h:form>
 		<P></P>
 	</ui:composition>
 
