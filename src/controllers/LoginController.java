@@ -1,6 +1,7 @@
 package controllers;
 
 
+import javax.annotation.security.RolesAllowed;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -14,6 +15,7 @@ public class LoginController {
 	
 	@Inject
 	UserInterface login;
+	
 	
 	public String onSubmit() {
 		//get the user value from the input form.
@@ -38,6 +40,7 @@ public class LoginController {
 		}
 	}
 	
+	@RolesAllowed("GcuUser")
 	public String onLogoff() {
 		// Invalidate the Session to clear the security token
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
